@@ -7,7 +7,7 @@ export default function Home() {
       <div className="col-span-1 border rounded border-red-500">
         <OptionsBar />
       </div>
-      <div className="col-span-3 border rounded border-green-500">
+      <div className="col-span-3">
         <TasksList />
       </div>
     </div>
