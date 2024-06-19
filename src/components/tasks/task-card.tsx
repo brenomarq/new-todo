@@ -7,17 +7,12 @@ interface TaskCardProps {
 
 export default function TaskCard({ task }: TaskCardProps) {
   return (
-    <Card>
-      <CardHeader>{task.title}</CardHeader>
+    <Card isBlurred={true}>
+      <CardHeader>
+        <h4 className="text-md">{task.title}</h4>
+      </CardHeader>
       <Divider />
       <CardBody>{task.category}</CardBody>
     </Card>
   );
 }
-// export default function TaskCard({ task }: TaskCardProps) {
-//   return (
-//     <Card isBlurred={true}>
-//       <CardBody>{task}</CardBody>
-//     </Card>
-//   );
-// }
