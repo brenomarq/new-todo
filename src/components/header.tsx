@@ -1,5 +1,4 @@
 import {
-  Button,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -8,6 +7,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "public/logo.svg";
+import CreateCategoryForm from "./categories/create-category-form";
 
 export default function Header() {
   return (
@@ -21,7 +21,7 @@ export default function Header() {
 
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button color="primary">Create</Button>
+          <CreateCategoryForm />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
