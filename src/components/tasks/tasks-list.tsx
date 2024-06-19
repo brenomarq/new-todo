@@ -1,3 +1,4 @@
+import { tasks } from "@/db/test";
 import { Divider } from "@nextui-org/react";
 import TaskCard from "./task-card";
 
@@ -6,7 +7,9 @@ export default function TasksList() {
     <div className="flex flex-col gap-3">
       <h1 className="text-xl font-bold">Tasks</h1>
       <Divider />
-      <TaskCard task="Do your Homework" />
+      {tasks.map((task) => {
+        return <TaskCard key={task.id} task={task}></TaskCard>;
+      })}
     </div>
   );
 }
