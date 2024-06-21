@@ -1,5 +1,8 @@
 "use server";
 
+import { db } from "@/db";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const createCategorySchema = z.object({
@@ -19,8 +22,6 @@ export async function createCategory(
   formState: any,
   formData: FormData
 ): Promise<createCategoryFormState> {
-  console.log("I was called!");
-
   const result = createCategorySchema.safeParse({
     name: formData.get("name"),
     color: formData.get("color"),
@@ -32,8 +33,31 @@ export async function createCategory(
     };
   }
 
-  console.log("No problem!");
-  return {
-    errors: {},
-  };
+  try {
+    const category = await db.category.create({
+      data: {
+        name: result.data.name,
+        color: result.data.color,
+      },
+    });
+
+    console.log(category);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return {
+        errors: {
+          _form: [err.message],
+        },
+      };
+    } else {
+      return {
+        errors: {
+          _form: ["Failed to create category"],
+        },
+      };
+    }
+  }
+
+  revalidatePath("/");
+  redirect("/");
 }
